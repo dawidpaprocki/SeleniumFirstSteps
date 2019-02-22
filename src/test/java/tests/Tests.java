@@ -5,11 +5,10 @@ import org.junit.Before;
 import org.junit.Test;
 import pages.AbTest;
 import pages.BasicAuth;
+import pages.BrokenImages;
 import pages.Home;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class Tests extends TestConfig {
     private Home home;
@@ -34,6 +33,14 @@ public class Tests extends TestConfig {
         BasicAuth basicAuth = new BasicAuth();
         home.profileLogin("admin","admin");
         assertEquals(basicAuth.getH3Text().getText(),"Basic Auth");
+    }
+    @Test
+    public void TestBrokenImagesCheck() {
+        home.getBrokenImages().click();
+        BrokenImages brokenImages = new BrokenImages();
+        assertFalse(brokenImages.checkIfNotBroken(brokenImages.getAsdf()));
+        assertFalse(brokenImages.checkIfNotBroken(brokenImages.getHjkl()));
+        assertTrue(brokenImages.checkIfNotBroken(brokenImages.getAvatar()));
     }
 
 
