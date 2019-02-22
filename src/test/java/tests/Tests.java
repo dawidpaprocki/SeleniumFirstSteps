@@ -3,10 +3,10 @@ package tests;
 import config.TestConfig;
 import org.junit.Before;
 import org.junit.Test;
-import pages.AbTest;
-import pages.BasicAuth;
-import pages.BrokenImages;
-import pages.Home;
+import org.openqa.selenium.WebElement;
+import pages.*;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -32,16 +32,29 @@ public class Tests extends TestConfig {
     public void TestBasicAuth() {
         BasicAuth basicAuth = new BasicAuth();
         home.profileLogin("admin","admin");
+        
         assertEquals(basicAuth.getH3Text().getText(),"Basic Auth");
     }
     @Test
     public void TestBrokenImagesCheck() {
         home.getBrokenImages().click();
         BrokenImages brokenImages = new BrokenImages();
+
         assertFalse(brokenImages.checkIfNotBroken(brokenImages.getAsdf()));
         assertFalse(brokenImages.checkIfNotBroken(brokenImages.getHjkl()));
         assertTrue(brokenImages.checkIfNotBroken(brokenImages.getAvatar()));
     }
 
+    @Test
+    public void TestIfLastCheckBoxIsChecked() {
+        home.getCheckBoxes().click();
+
+        Checkboxes checkboxes = new Checkboxes();
+        List<WebElement> checkBox = checkboxes.getCheckBox();
+
+        WebElement webElementChecked = checkBox.get(checkBox.size() - 1);
+
+        assertTrue(webElementChecked.isSelected());
+    }
 
 }
