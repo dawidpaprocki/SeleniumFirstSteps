@@ -61,5 +61,18 @@ public class DynamicControlsTest extends TestConfig {
         assertEquals(dynamicControls.getMessage().getText(),"It's back!");
     }
 
+    @Test
+    public void TestDynamicControlsEnableComponent() throws InterruptedException {
+        //given
+        home.getDynamicControls().click();
+        DynamicControls dynamicControls = new DynamicControls();
+        //when
+        Thread.sleep(1000);
+        dynamicControls.getButton("Enable").click();
+        Thread.sleep(5000);
+        //then
+        assertTrue(dynamicControls.getTextField().isEnabled());
+    }
+
 
 }

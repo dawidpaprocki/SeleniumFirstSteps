@@ -13,6 +13,8 @@ public class DynamicControls extends BasePage{
 
     @FindBy(css = "input[type='checkbox']")
     private WebElement checkBox;
+    @FindBy(css = "input[type='text']")
+    private WebElement textField;
     @FindBy(css = "button[type='button']")
     private List<WebElement> listOFButton;
     @FindBy(id = "loading")
@@ -28,8 +30,10 @@ public class DynamicControls extends BasePage{
         return style.equals("");
     }
     public WebElement getButton(String button){
-        Optional<WebElement> webElement1 = listOFButton.stream().findFirst().filter(webElement -> webElement.getText().equals(button));
-        return webElement1.get();
+        Optional<WebElement> foundElement = listOFButton.stream()
+                .filter(webElement -> webElement.getText().equals(button))
+                .findFirst();
+        return foundElement.get();
     }
 
     public Boolean checkIfElementIsPresent(WebElement webElement){
