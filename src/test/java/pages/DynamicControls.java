@@ -31,5 +31,13 @@ public class DynamicControls extends BasePage{
         Optional<WebElement> webElement1 = listOFButton.stream().findFirst().filter(webElement -> webElement.getText().equals(button));
         return webElement1.get();
     }
-    
+
+    public Boolean checkIfElementIsPresent(WebElement webElement){
+        try{
+            webElement.getText();
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
 }

@@ -33,6 +33,33 @@ public class DynamicControlsTest extends TestConfig {
         assertTrue(visibilityOfElement);
     }
 
+    @Test
+    public void TestDynamicControlsRemoveObject() throws InterruptedException {
+        //given
+        home.getDynamicControls().click();
+        DynamicControls dynamicControls = new DynamicControls();
+        //when
+        dynamicControls.getButton("Remove").click();
+        Thread.sleep(5000);
+        //then
+        assertFalse(dynamicControls.checkIfElementIsPresent(dynamicControls.getCheckBox()));
+        assertEquals(dynamicControls.getMessage().getText(),"It's gone!");
+    }
+
+    @Test
+    public void TestDynamicControlsAddBackObject() throws InterruptedException {
+        //given
+        home.getDynamicControls().click();
+        DynamicControls dynamicControls = new DynamicControls();
+        //when
+        dynamicControls.getButton("Remove").click();
+        Thread.sleep(5000);
+        dynamicControls.getButton("Add").click();
+        Thread.sleep(3000);
+        //then
+        assertTrue(dynamicControls.checkIfElementIsPresent(dynamicControls.getCheckBox()));
+        assertEquals(dynamicControls.getMessage().getText(),"It's back!");
+    }
 
 
 }
