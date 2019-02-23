@@ -30,8 +30,11 @@ public class Home extends BasePage {
     @FindBy(linkText = "Disappearing Elements")
     private WebElement disappearingElements;
 
+    @FindBy(linkText = "Drag and Drop")
+    private WebElement dragAndDrop;
+
     @FindBy(linkText = "Dropdown")
-    private WebElement dropdown;
+    private WebElement dropDown;
 
     @FindBy(linkText = "Dynamic Content")
     private WebElement dynamicContent;
@@ -40,7 +43,7 @@ public class Home extends BasePage {
     private WebElement dynamicControls;
 
     @FindBy(linkText = "Dynamic Loading")
-    private WebElement ynamicLoading;
+    private WebElement dynamicLoading;
 
     @FindBy(linkText = "Exit Intent")
     private WebElement exitIntent;
