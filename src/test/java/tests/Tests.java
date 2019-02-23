@@ -93,5 +93,40 @@ public class Tests extends TestConfig {
         assertTrue(exitIntent.getOuiBounceModal().isDisplayed());
     }
 
+    @Test
+    public void TestHoverCheckingH5TextIsVisible(){
+        //given
+        home.getHovers().click();
+        Hovers hovers = new Hovers();
+        //then
+        assertTrue(hovers.hoverElement(0));
+        assertFalse(hovers.hoverElement(1));
+    }
 
+
+    @Test
+    public void TestDownloadIsFileDownloadedTrue() throws InterruptedException {
+        //given
+        home.getFileDownload().click();
+        Download download = new Download();
+        //when
+        Thread.sleep(1000);
+        download.moveToLink(download.getUploadFileJpeg());
+        Thread.sleep(3000);
+        //then
+        assertTrue(download.checkIfDownloaded(download.getUploadFileJpeg()));
+    }
+
+    @Test
+    public void TestDownloadIsFileDownloadedFalse() throws InterruptedException {
+        //given
+        home.getFileDownload().click();
+        Download download = new Download();
+        //when
+        Thread.sleep(1000);
+        download.moveToLink(download.getSomeFileText());
+        Thread.sleep(3000);
+        //then
+        assertFalse(download.checkIfDownloaded(download.getUploadFileJpeg()));
+    }
 }
