@@ -26,10 +26,11 @@ public class Tests extends TestConfig {
         AbTest abTest = new AbTest();
         //when
         String textFromH3ForTest = abTest.getH3Text().getText();
+        String textFromPForTest = abTest.getPText().getText();
         //then
         assertTrue(textFromH3ForTest.equals("A/B Test Variation 1") ||
                 textFromH3ForTest.equals("A/B Test Control"));
-        assertEquals(textFromH3ForTest, "Also known as split testing. This is a way in which businesses are able to simultaneously test and learn different" +
+        assertEquals(textFromPForTest, "Also known as split testing. This is a way in which businesses are able to simultaneously test and learn different" +
                 " versions of a page to see which text and/or functionality works best towards a desired outcome (e.g. a user action such as a click-through).");
     }
 
