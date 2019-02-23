@@ -20,7 +20,7 @@ public class Tests extends TestConfig {
     }
 
     @Test
-    public void testAbTestText() {
+    public void TestAbTestText() {
         //given
         home.getABTesting().click();
         AbTest abTest = new AbTest();
@@ -129,4 +129,5 @@ public class Tests extends TestConfig {
         //then
         assertFalse(download.checkIfDownloaded(download.getUploadFileJpeg()));
     }
+
 }
