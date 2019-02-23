@@ -80,4 +80,18 @@ public class Tests extends TestConfig {
         assertEquals("Option 2", selectList.getFirstSelectedOption().getText());
     }
 
+    @Test
+    public void TestExitIntentTopPopOut() throws InterruptedException {
+        //given
+        home.getExitIntent().click();
+        ExitIntent exitIntent = new ExitIntent();
+        //when
+        Thread.sleep(1000);
+        exitIntent.mouseMove(0,-300);
+        Thread.sleep(2000);
+        //then
+        assertTrue(exitIntent.getOuiBounceModal().isDisplayed());
+    }
+
+
 }
