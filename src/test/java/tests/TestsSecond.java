@@ -3,10 +3,7 @@ package tests;
 import config.TestConfigSecond;
 import org.junit.Before;
 import org.junit.Test;
-import pagesSecond.Authentication;
-import pagesSecond.CreateAccount;
-import pagesSecond.HomeSecond;
-import pagesSecond.MyAccount;
+import pagesSecond.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -17,8 +14,9 @@ public class TestsSecond extends TestConfigSecond {
     private Authentication authentication;
     private MyAccount myAccount;
     private CreateAccount createAccount;
+
     @Before
-    public void Before(){
+    public void Before() {
 
         home = new HomeSecond();
         authentication = new Authentication();
@@ -45,12 +43,13 @@ public class TestsSecond extends TestConfigSecond {
         home.signIn();
         Thread.sleep(2000);
         // when
-        authentication.inputText(authentication.getTextFieldForEmail(),createRandomString()+"@o2.pl");
+        authentication.inputText(authentication.getTextFieldForEmail(), createRandomString() + "@o2.pl");
         Thread.sleep(2000);
         // then
         assertTrue(createAccount.getSubHeading().isDisplayed());
     }
-      @Test
+
+    @Test
     public void TestLogin() throws InterruptedException {
         // given
         home.signIn();
@@ -67,9 +66,21 @@ public class TestsSecond extends TestConfigSecond {
         // given
         home.signIn();
         // when
-        authentication.inputText(authentication.getTextFieldForEmail(),createRandomString()+"@o2.pl");
+        authentication.inputText(authentication.getTextFieldForEmail(), createRandomString() + "@o2.pl");
         createAccount.createCustomer();
         // then
-        assertEquals(myAccount.getPageHeading().getText(),"My account");
+        assertEquals(myAccount.getPageHeading().getText(), "My account");
+    }
+
+    @Test
+    public void checkAddedToShoppingCart() throws InterruptedException {
+        // given
+        home.getDresses().click();
+        Dresses dresses = new Dresses();
+        // when
+        Thread.sleep(2000);
+        dresses.addDressToCart();
+        // then
+        assertTrue(dresses.checkIfElementIsVisible("cart_block_product_name"));
     }
 }

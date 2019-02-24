@@ -10,6 +10,9 @@ public class HomeSecond extends BasePageSecond {
     @FindBy(className = "header_user_info" )
     private WebElement signIn;
 
+    @FindBy(css = "#block_top_menu > ul > li >a[title='Dresses']")
+    private WebElement dresses;
+
     public HomeSecond() {
         super();
     }
