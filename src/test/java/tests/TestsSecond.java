@@ -6,25 +6,32 @@ import org.junit.Test;
 import pagesSecond.Authentication;
 import pagesSecond.CreateAccount;
 import pagesSecond.HomeSecond;
+import pagesSecond.MyAccount;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static utility.DataCreator.createRandomString;
 
 public class TestsSecond extends TestConfigSecond {
     private HomeSecond home;
-
+    private Authentication authentication;
+    private MyAccount myAccount;
+    private CreateAccount createAccount;
     @Before
     public void Before(){
+
         home = new HomeSecond();
+        authentication = new Authentication();
+        myAccount = new MyAccount();
+        createAccount = new CreateAccount();
     }
 
 
     @Test
-    public void SignInFail() throws InterruptedException {
+    public void TestSignInFail() throws InterruptedException {
         // given
         home.signIn();
         Thread.sleep(2000);
-        Authentication authentication = new Authentication();
         // when
         authentication.getSignInButton().click();
         Thread.sleep(2000);
@@ -33,17 +40,36 @@ public class TestsSecond extends TestConfigSecond {
     }
 
     @Test
-    public void setEmailCorrect() throws InterruptedException {
+    public void TestSetEmailCorrectAndSignIn() throws InterruptedException {
         // given
         home.signIn();
         Thread.sleep(2000);
-        Authentication authentication = new Authentication();
-        CreateAccount createAccount = new CreateAccount();
         // when
-
         authentication.inputText(authentication.getTextFieldForEmail(),createRandomString()+"@o2.pl");
         Thread.sleep(2000);
         // then
         assertTrue(createAccount.getSubHeading().isDisplayed());
+    }
+      @Test
+    public void TestLogin() throws InterruptedException {
+        // given
+        home.signIn();
+        Thread.sleep(2000);
+        // when
+        authentication.getEMail().sendKeys("srel2@o2.pl");
+        authentication.getPassword().sendKeys("12345");
+        // then
+        assertTrue(myAccount.getPageHeading().isDisplayed());
+    }
+
+    @Test
+    public void fillUpCustomerRegisterData() throws InterruptedException {
+        // given
+        home.signIn();
+        // when
+        authentication.inputText(authentication.getTextFieldForEmail(),createRandomString()+"@o2.pl");
+        createAccount.createCustomer();
+        // then
+        assertEquals(myAccount.getPageHeading().getText(),"My account");
     }
 }

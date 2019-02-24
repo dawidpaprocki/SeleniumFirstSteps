@@ -100,7 +100,7 @@ public class Tests extends TestConfig {
         Hovers hovers = new Hovers();
         //then
         assertTrue(hovers.hoverElement(0));
-        assertFalse(hovers.hoverElement(1));
+        assertTrue(hovers.hoverElement(1));
     }
 
 

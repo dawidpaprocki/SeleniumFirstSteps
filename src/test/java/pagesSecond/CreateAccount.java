@@ -63,8 +63,7 @@ public class CreateAccount extends BasePageSecond {
         super();
     }
 
-    public void fillInRegistrationForm(){
-
+    public void createCustomer() throws InterruptedException {
         maleTitleRadio.click();
         newsletter.click();
         customerFirstName.sendKeys("Daw");
@@ -75,9 +74,10 @@ public class CreateAccount extends BasePageSecond {
         new Select(birthdayYearSelect).selectByValue("1990");
         addressLine.sendKeys("Uliczna1");
         city.sendKeys("miasto");
-        zipCode.sendKeys("11-101");
+        new Select(stateSelect).selectByValue("1");
+        zipCode.sendKeys("11101");
         phoneNumber.sendKeys("123456");
         submitButton.click();
+        Thread.sleep(10000);
     }
-
 }

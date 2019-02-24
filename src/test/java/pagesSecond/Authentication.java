@@ -14,6 +14,15 @@ public class Authentication extends BasePageSecond {
     @FindBy(id = "create_account_error")
     private WebElement createAccountError;
 
+    @FindBy(id = "email")
+    private WebElement eMail;
+
+    @FindBy(id = "passwd")
+    private WebElement password;
+
+    @FindBy(id = "SubmitLogin")
+    private WebElement submitLogin;
+
     public Authentication() {
         super();
     }
